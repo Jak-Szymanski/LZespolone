@@ -1,19 +1,20 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "./doctest/doctest.h"
 #include "WyrazenieZesp.hh"
+#include "Statystyki.hh"
 #include "LZespolona.hh"
 #include <iostream>
 #include <sstream>
 #include <string>
 
-/* using namespace std;
+
+using namespace std;
 
 string toString( ostream& str){
     ostringstream ss;
     ss << str.rdbuf();
     return ss.str();
 }
-
 
 TEST_CASE("Test wyswietlania wyrazenia"){
 
@@ -31,11 +32,11 @@ TEST_CASE("Test wyswietlania wyrazenia"){
     stream << x;
     string g = toString(stream);
     string str;
-    str = "(1-2i) + (-3+4i)";
+    str = "(1.0000-2.0000i) + (-3.0000+4.0000i)";
     CHECK(str == g); 
-    }*/
+}
 
-/* TEST_CASE("Test WyrazenieZesp dodawanie") {
+TEST_CASE("Test WyrazenieZesp oblicz") {
     WyrazenieZesp x;
     LZespolona y, z;
 
@@ -52,26 +53,32 @@ TEST_CASE("Test wyswietlania wyrazenia"){
 
     z = Oblicz(x);
     CHECK(y == z);
-} */
+}
 
-/* TEST_CASE("Test WyrazenieZesp odejmowanie") {
-    WyrazenieZesp x;
-    LZespolona y, z;
+TEST_CASE("test Statystyki poprawna odp"){
+    Statystyka x;
 
-    x.Arg1.re = 1;
-    x.Arg1.im = -2;
+    x.poprawne = 3;
+    x.wszystkie = 5;
 
-    x.Op = Op_Odejmij;
-   
-    x.Arg2.re = -3;
-    x.Arg2.im = 4;
+    x = Poprawnie(x);
 
-    y.re = 2;
-    y.im = -6;
+    CHECK(x.poprawne == 4);
+    CHECK(x.wszystkie == 6);
+}
 
-    z = Oblicz(x);
-    CHECK(y == z);
-} */
+TEST_CASE("test Statystyki niepoprawna odp"){
+    Statystyka x;
+
+    x.poprawne = 3;
+    x.wszystkie = 5;
+
+    x = Niepoprawnie(x);
+
+    CHECK(x.poprawne == 3);
+    CHECK(x.wszystkie == 6);
+}
+
 
 
 

@@ -11,22 +11,22 @@ Zwraca:
     adres wyjścia standardowego
  */
 ostream& operator << (ostream &wyjscie, WyrazenieZesp &WyrZ){
-    cout << WyrZ.Arg1;
+    wyjscie << WyrZ.Arg1;
     switch(WyrZ.Op){
         case Op_Dodaj:
-        cout << " + ";
+        wyjscie << " + ";
         break;
         case Op_Odejmij:
-        cout << " - ";
+        wyjscie << " - ";
         break;
         case Op_Mnoz:
-        cout << " * ";
+        wyjscie << " * ";
         break;
         case Op_Dziel:
-        cout << " / ";
+        wyjscie << " / ";
         break;
     }
-    cout << WyrZ.Arg2;
+    wyjscie << WyrZ.Arg2;
     return wyjscie;
 }
 

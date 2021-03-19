@@ -34,8 +34,8 @@ ${OBJ}/Statystyki.o: ${SRC}/Statystyki.cpp inc/Statystyki.hh
 ${TBIN}/test_1: ${TBIN} ${OBJ}/LZespolona.o 
 	g++ -o ${TESTS}/bin/test_1 ${FLAGS} -I${TESTS}/doctest ${TESTS}/test1.cpp ${OBJ}/LZespolona.o
 
-${TBIN}/test_2: ${TBIN} ${OBJ}/LZespolona.o 
-	g++ -o ${TESTS}/bin/test_2 ${FLAGS} -I${TESTS}/doctest ${TESTS}/test2.cpp ${OBJ}/LZespolona.o
+${TBIN}/test_2: ${TBIN} ${OBJ}/WyrazenieZesp.o ${OBJ}/LZespolona.o ${OBJ}/Statystyki.o 
+	g++ -o ${TESTS}/bin/test_2 ${FLAGS} -I${TESTS}/doctest ${TESTS}/test2.cpp ${OBJ}/WyrazenieZesp.o ${OBJ}/LZespolona.o ${OBJ}/Statystyki.o 
 
 
 ${TBIN}:

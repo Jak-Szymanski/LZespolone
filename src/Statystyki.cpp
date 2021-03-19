@@ -1,7 +1,5 @@
 #include "Statystyki.hh"
 
-
-
 Statystyka Wyzeruj(Statystyka Stat){
     Stat.poprawne = 0;
     Stat.wszystkie = 0.0;

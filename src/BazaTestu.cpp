@@ -10,7 +10,7 @@ using namespace std;
  * Zawiera ona tresc latwego testu.
  */
 static WyrazenieZesp  TestLatwy[] =
-  { {{2,1}, Op_Dodaj, {1,2}},
+  { {{1,-2}, Op_Dodaj, {-3,4}},
     {{1,0}, Op_Odejmij, {0,1}},
     {{3,0}, Op_Mnoz, {0,3}},
     {{4,8}, Op_Dziel, {1,0}},
@@ -21,10 +21,10 @@ static WyrazenieZesp  TestLatwy[] =
  *
  */
 static WyrazenieZesp TestTrudny[] =
-  { {{3,3}, Op_Dodaj, {1,2}},
-    {{3,3}, Op_Odejmij, {0,1}},
-    {{3,3}, Op_Mnoz, {0,3}},
-    {{3,3}, Op_Dziel, {1,0}},
+  { {{58,-36}, Op_Dodaj, {24,48}},
+    {{-57,42}, Op_Odejmij, {-72,84}},
+    {{6,-9}, Op_Mnoz, {-7,-8}},
+    {{8,7}, Op_Dziel, {2,-4}},
   };
 
 
