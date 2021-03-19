@@ -1,40 +1,25 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "./doctest/doctest.h"
-#include "LZespolona.hh"
+#include "WyrazenieZesp.hh"
 
-TEST_CASE("Test LZespolona dzielenie przez skalar 1") {
-    LZespolona x, y;
-    double t = 2;
-    
-    x.re = 2;
-    x.im = 2;
+TEST_CASE("Test WyrazenieZesp dodawanie") {
+    WyrazenieZesp x;
+    LZespolona y, z;
 
-    y.re = 1;
-    y.im = 1;
+    x.Arg1.re = 1;
+    x.Arg1.im = -2;
+
+    x.Op = Op_Dodaj;
    
-    CHECK(x/t == y);
+    x.Arg2.re = -3;
+    x.Arg2.im = 4;
+
+    y.re = -2;
+    y.im = 2;
+
+    z = Oblicz(x);
+    CHECK(y == z);
 }
 
-TEST_CASE("Test LZespolona dzielenie przez skalar 2") {
-    LZespolona x, y;
-    double t = 3;
-    
-    x.re = 2;
-    x.im = 2;
 
-    y.re = 1;
-    y.im = 1;
-   
-    CHECK(x/t == y);
-}
-
-TEST_CASE("Test LZespolona dzielenie przez skalar - zero") {
-    LZespolona x;
-    double t = 0;
-    
-    x.re = 2;
-    x.im = 2;
- 
-   WARN_THROWS(x/t);
-}
 

@@ -1,6 +1,7 @@
 #ifndef WYRAZENIEZESP_HH
 #define WYRAZENIEZESP_HH
 
+using namespace std;
 
 
 #include "LZespolona.hh"
@@ -23,13 +24,8 @@ struct WyrazenieZesp {
 };
 
 
-/*
- * Funkcje ponizej nalezy zdefiniowac w module.
- *
- */
-
-
-void Wyswietl(WyrazenieZesp  WyrZ);
+/*przeciążenia operatorów dla wyrażeń zespolonych*/
+ostream& operator << (ostream &wyjscie, WyrazenieZesp &WyrZ);
 LZespolona Oblicz(WyrazenieZesp  WyrZ);
 
 #endif

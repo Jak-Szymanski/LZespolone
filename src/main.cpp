@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "BazaTestu.hh"
 
 using namespace std;
@@ -31,16 +32,52 @@ int main(int argc, char **argv)
   cout << " Start testu arytmetyki zespolonej: " << argv[1] << endl;
   cout << endl;
 
+  int i;
   WyrazenieZesp   WyrZ_PytanieTestowe;
+  LZespolona      Odpowiedz;    
+  LZespolona      Wynik;
+  Statystyka      StatOdp;
+  StatOdp = Wyzeruj(StatOdp);
   
   while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
-    cout << " Czesc rzeczywista pierwszego argumentu: ";
-    cout << WyrZ_PytanieTestowe.Arg1.re << endl;
+    cout << "Podaj wynik operacji: " << WyrZ_PytanieTestowe << " = " << endl;
+    cout << endl << "Twoja odpowiedz:  " << endl;
+    cin >> Odpowiedz;
+    if(cin.fail()){
+      for(i=0;i<2;i++){
+        cin.clear();
+        cin.ignore(256, '\n');
+        cout << endl;
+        cout << "Blad zapisu liczby zespolonej. Sprobuj jeszcze raz." << endl;
+        cout << endl << "Twoja odpowiedz:  " << endl;
+        cin >> Odpowiedz;
+        if(!cin.fail()){
+          break;
+        }    
+      }
+      if(cin.fail()){
+        cout << "Przekroczono liczbę błędów zapisu liczby zespolonej." << endl;
+      }
+      cin.clear();
+      cin.ignore(256, '\n');
+    }
+    cout << endl;
+    Wynik = Oblicz(WyrZ_PytanieTestowe);
+    if(Odpowiedz == Wynik){
+      cout << " :) Odpowiedz poprawna! " << endl << endl;
+      StatOdp = Poprawnie(StatOdp);
+    } else {
+      cout << " :( Odpowiedz niepoprawna, prawidlowy wynik: " << Wynik << endl << endl; 
+      StatOdp = Niepoprawnie(StatOdp);
+    }
   }
 
   
   cout << endl;
   cout << " Koniec testu" << endl;
   cout << endl;
+  cout << "Ilosc dobrych odpowiedzi: " << StatOdp.poprawne << endl;
+  cout << "Ilosc blednych odpowiedzi: " << StatOdp.wszystkie - StatOdp.poprawne << endl;
+  cout << "Wynik procentowy poprawnych odpowiedzi: " << 100 * StatOdp.poprawne / StatOdp.wszystkie << "%" << endl;
 
 }

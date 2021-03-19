@@ -1,13 +1,13 @@
-#ifndef WYRAZENIEZESP_HH
-#define WYRAZENIEZESP_HH
+#ifndef STATYSTYKI_HH
+#define STATYSTYKI_HH
+
+struct Statystyka{
+    int poprawne;
+    double wszystkie;
+};
 
 
-
-#include "LZespolona.hh"
-#include "WyrazenieZesp.hh"
-
-/*
- * Tu nalezy zdefiniowac funkcje, ktore definiuja model statystyki 
- */
-
+Statystyka Wyzeruj(Statystyka Stat);
+Statystyka Poprawnie(Statystyka Stat);
+Statystyka Niepoprawnie(Statystyka Stat);
 #endif
