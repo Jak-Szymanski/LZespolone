@@ -1,20 +1,17 @@
 #include "Statystyki.hh"
 
-Statystyka Wyzeruj(Statystyka Stat){
-    Stat.poprawne = 0;
-    Stat.wszystkie = 0.0;
-    return Stat;
+void Statystyka::Wyzeruj(){
+    this->poprawne = 0;
+    this->wszystkie = 0.0;
 }
 
 
-Statystyka Poprawnie(Statystyka Stat){
-    Stat.poprawne+=1;
-    Stat.wszystkie+=1.0;
-    return Stat;
+ void Statystyka::Poprawnie(){
+    this->poprawne+=1;
+    this->wszystkie+=1.0;
 }
 
 
-Statystyka Niepoprawnie(Statystyka Stat){
-    Stat.wszystkie+=1.0;
-    return Stat;
+void Statystyka::Niepoprawnie(){
+    this->wszystkie+=1.0;
 }

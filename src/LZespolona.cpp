@@ -3,7 +3,7 @@
 #include <iomanip>
 #include "LZespolona.hh"
 
-#define MIN_DIFF 0.0001
+#define MIN_DIFF 0.01
 
 using namespace std;
 
@@ -13,9 +13,8 @@ Argumenty:
 Zwraca:
   Sprzężenie liczby Skl1
  */
-LZespolona Sprzezenie(LZespolona Skl1){
-  Skl1.im = -Skl1.im;
-  return Skl1;
+void LZespolona::Sprzezenie(){
+  this->im = -this->im;
 }
 
 /* Oblicza kwadrat modułu liczby zespolonej
@@ -24,8 +23,8 @@ Argumenty:
 Zwraca:
   Kwadrat modułu liczby Skl1
  */
-double Modul2(LZespolona Skl1){
-  return Skl1.re*Skl1.re + Skl1.im * Skl1.im;
+double LZespolona::Modul2(){
+  return this->re*this->re + this->im * this->im;
 }
 
 /*!
@@ -36,13 +35,11 @@ double Modul2(LZespolona Skl1){
  * Zwraca:
  *    Sume dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2)
-{
-  LZespolona  Wynik;
+LZespolona  LZespolona::operator + (LZespolona  Skl2){
 
-  Wynik.re = Skl1.re + Skl2.re;
-  Wynik.im = Skl1.im + Skl2.im;
-  return Wynik;
+  Skl2.re += this -> re;
+  Skl2.im += this -> im;
+  return Skl2;
 }
 
 /*!
@@ -53,13 +50,11 @@ LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2)
  * Zwraca:
  *    Różnicę dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona operator - (LZespolona Skl1, LZespolona Skl2){
+LZespolona  LZespolona::operator - (LZespolona Skl2){
 
-  LZespolona Wynik;
-
-  Wynik.re = Skl1.re - Skl2.re;
-  Wynik.im = Skl1.im - Skl2.im;
-  return Wynik;
+  Skl2.re = this->re - Skl2.re;
+  Skl2.im = this->im - Skl2.im;
+  return Skl2;
 }
 
 /*!
@@ -70,12 +65,11 @@ LZespolona operator - (LZespolona Skl1, LZespolona Skl2){
  * Zwraca:
  *    Iloczyn dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona operator * (LZespolona Skl1, LZespolona Skl2){
+LZespolona LZespolona::operator * (LZespolona Skl2){
 
   LZespolona Wynik;
-
-  Wynik.re = Skl1.re*Skl2.re - Skl1.im*Skl2.im;
-  Wynik.im = Skl1.im*Skl2.re + Skl1.re*Skl2.im;
+  Wynik.re = this->re*Skl2.re - this->im*Skl2.im;
+  Wynik.im = this->im*Skl2.re + this->re*Skl2.im;
   return Wynik;
 }
 
@@ -87,10 +81,11 @@ LZespolona operator * (LZespolona Skl1, LZespolona Skl2){
  * Zwraca:
  *    Iloraz dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona operator / (LZespolona Skl1, LZespolona Skl2){
+LZespolona LZespolona::operator / (LZespolona Skl2){
 
   LZespolona Wynik;
-  Wynik = (Skl1 * Sprzezenie(Skl2)) / Modul2(Skl2);
+  Skl2.Sprzezenie();
+  Wynik = (*this * Skl2) / Skl2.Modul2();
   return Wynik;
 }
 
@@ -101,14 +96,14 @@ Argumenty:
 Zwraca:
   Iloraz dwóch skladników przekazanych jako parametry (liczb. zesp.)
  */
-LZespolona operator / (LZespolona Skl1, double Liczba){
+LZespolona LZespolona::operator / (double Liczba) const{
   
   if(Liczba == 0){
-    throw invalid_argument("Błąd - dzielenie przez zero");
+    throw runtime_error("Dzielenie przez zero \n");
   }
   LZespolona Wynik;
-  Wynik.re = Skl1.re / Liczba;
-  Wynik.im = Skl1.im / Liczba;
+  Wynik.re = this->re / Liczba;
+  Wynik.im = this->im / Liczba;
   return Wynik;
 }
 
@@ -120,9 +115,9 @@ Zwraca:
   1 - gdy te liczby są sobie prawie równe
   0 - gdy te liczby nie są sobie wcale równe
  */
-bool operator == (LZespolona Skl1, LZespolona Skl2){
+bool LZespolona::operator == (LZespolona Skl2) const{
 
-  if((abs(Skl1.re - Skl2.re) < MIN_DIFF) && (abs(Skl1.im - Skl2.im) < MIN_DIFF)){
+  if((abs(this->re - Skl2.re) <= MIN_DIFF) && (abs(this->im - Skl2.im) <= MIN_DIFF)){
     return 1;
   } else {
     return 0;
@@ -180,7 +175,9 @@ Zwraca:
     adres wyjścia standardowego
 */
 ostream& operator << (ostream &wyjscie, LZespolona &LZesp){
-    wyjscie << "("<< fixed << setprecision (4) << LZesp.re << showpos << fixed << setprecision (4) << LZesp.im  << noshowpos << "i)";
+    double re = (int)(LZesp.re * 100);
+    double im = (int)(LZesp.im * 100);
+    wyjscie << "(" << (double)re/100 << showpos << (double)im/100  << noshowpos << "i)";
     return wyjscie;
 }
 

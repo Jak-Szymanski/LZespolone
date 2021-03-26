@@ -21,11 +21,16 @@ struct WyrazenieZesp {
   LZespolona   Arg1;   // Pierwszy argument wyrazenia arytmetycznego
   Operator     Op;     // Opertor wyrazenia arytmetycznego
   LZespolona   Arg2;   // Drugi argument wyrazenia arytmetycznego
+  friend ostream& operator << (ostream &wyjscie, WyrazenieZesp &WyrZ);
+  friend istream& operator >> (istream &wejscie, WyrazenieZesp &WyrZ);
+  LZespolona Oblicz();
 };
 
 
 /*przeciążenia operatorów dla wyrażeń zespolonych*/
-ostream& operator << (ostream &wyjscie, WyrazenieZesp &WyrZ);
-LZespolona Oblicz(WyrazenieZesp  WyrZ);
+
+istream& operator >> (istream &wejscie, Operator &Op);
+
+
 
 #endif

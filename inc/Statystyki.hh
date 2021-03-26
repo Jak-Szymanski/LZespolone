@@ -4,10 +4,10 @@
 struct Statystyka{
     int poprawne;
     double wszystkie;
+
+    void Wyzeruj();
+    void Poprawnie();
+    void Niepoprawnie();
 };
 
-
-Statystyka Wyzeruj(Statystyka Stat);
-Statystyka Poprawnie(Statystyka Stat);
-Statystyka Niepoprawnie(Statystyka Stat);
 #endif

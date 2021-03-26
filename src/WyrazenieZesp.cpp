@@ -30,27 +30,72 @@ ostream& operator << (ostream &wyjscie, WyrazenieZesp &WyrZ){
     return wyjscie;
 }
 
+
+istream& operator >> (istream &wejscie, WyrazenieZesp &WyrZ) {
+    wejscie >> WyrZ.Arg1;
+    if(wejscie.fail()){
+        wejscie.setstate(ios::failbit);
+        return wejscie;
+    }
+    wejscie >> WyrZ.Op;
+    if(wejscie.fail()){
+        wejscie.setstate(ios::failbit);
+        return wejscie;
+    }
+    wejscie >> WyrZ.Arg2;
+    if(wejscie.fail()){
+        wejscie.setstate(ios::failbit);
+        return wejscie;
+    }
+    wejscie.setstate(ios::goodbit);
+    return wejscie;
+}
+
+
+istream& operator >> (istream &wejscie, Operator &Op) {
+    char Oper;
+    wejscie >> Oper;
+    switch(Oper){
+        case '+':
+            Op = Op_Dodaj;
+        break;
+        case '-':
+            Op = Op_Odejmij;
+        break;
+        case '*':
+            Op = Op_Mnoz;
+        break;
+        case '/':
+            Op = Op_Dziel;
+        break; 
+/*         default:
+        throw runtime_error("Niepoprawny operator \n");
+        break;   */  
+    }
+    return wejscie; 
+}
+
 /* Oblicza podane wyrażenie zespolone
 Argumenty:
     WyrZ - wyrażenie zespolone
 Zwraca:
     Wynik operacji jako liczba zespolona
  */
-LZespolona Oblicz(WyrazenieZesp  WyrZ){
+LZespolona WyrazenieZesp::Oblicz(){
     
     LZespolona Wynik;
-    switch(WyrZ.Op){
+    switch(this->Op){
         case Op_Dodaj:
-        Wynik = WyrZ.Arg1 + WyrZ.Arg2;
+            Wynik = this->Arg1 + this->Arg2;
         break;
         case Op_Odejmij:
-        Wynik = WyrZ.Arg1 - WyrZ.Arg2;
+            Wynik = this->Arg1 - this->Arg2;
         break;
         case Op_Mnoz:
-        Wynik = WyrZ.Arg1 * WyrZ.Arg2;
+            Wynik = this->Arg1 * this->Arg2;
         break;
         case Op_Dziel:
-        Wynik = WyrZ.Arg1 / WyrZ.Arg2;
+            Wynik = this->Arg1 / this->Arg2;
         break;       
     }
     return Wynik;

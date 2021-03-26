@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include "BazaTestu.hh"
 
@@ -37,39 +38,52 @@ int main(int argc, char **argv)
   LZespolona      Odpowiedz;    
   LZespolona      Wynik;
   Statystyka      StatOdp;
-  StatOdp = Wyzeruj(StatOdp);
-  
-  while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
-    cout << "Podaj wynik operacji: " << WyrZ_PytanieTestowe << " = " << endl;
-    cout << endl << "Twoja odpowiedz:  " << endl;
-    cin >> Odpowiedz;
-    if(cin.fail()){
-      for(i=0;i<2;i++){
+  string line;
+  StatOdp.Wyzeruj();
+  ifstream file ("plik.txt");
+
+  if (file.is_open()) {
+    while (file >> WyrZ_PytanieTestowe) {
+/*       try {
+      ;
+      if (file.eof()) break; */
+      cout << "Podaj wynik operacji: " << WyrZ_PytanieTestowe << " = " << endl;
+      cout << endl << "Twoja odpowiedz:  " << endl;
+      cin >> Odpowiedz;
+      if(cin.fail()){
+        for(i=0;i<2;i++){
+          cin.clear();
+          cin.ignore(256, '\n');
+          cout << endl;
+          cout << "Blad zapisu liczby zespolonej. Sprobuj jeszcze raz." << endl;
+          cout << endl << "Twoja odpowiedz:  " << endl;
+          cin >> Odpowiedz;
+          if(!cin.fail()){
+            break;
+          }    
+        }
+        if(cin.fail()){
+          cout << "Przekroczono liczbę błędów zapisu liczby zespolonej." << endl;
+        }
         cin.clear();
         cin.ignore(256, '\n');
-        cout << endl;
-        cout << "Blad zapisu liczby zespolonej. Sprobuj jeszcze raz." << endl;
-        cout << endl << "Twoja odpowiedz:  " << endl;
-        cin >> Odpowiedz;
-        if(!cin.fail()){
-          break;
-        }    
       }
-      if(cin.fail()){
-        cout << "Przekroczono liczbę błędów zapisu liczby zespolonej." << endl;
-      }
-      cin.clear();
-      cin.ignore(256, '\n');
+      cout << endl;
+        Wynik = WyrZ_PytanieTestowe.Oblicz();
+        if(Odpowiedz == Wynik){
+          cout << " :) Odpowiedz poprawna! " << endl << endl;
+          StatOdp.Poprawnie();
+        } else {
+          cout << " :( Odpowiedz niepoprawna, prawidlowy wynik: " << Wynik << endl << endl; 
+          StatOdp.Niepoprawnie();
+        }
+/*       }
+
+      catch (runtime_error& e) {
+        cerr << "Wystąpił błąd" << endl << e.what() << endl; 
+      } */
     }
-    cout << endl;
-    Wynik = Oblicz(WyrZ_PytanieTestowe);
-    if(Odpowiedz == Wynik){
-      cout << " :) Odpowiedz poprawna! " << endl << endl;
-      StatOdp = Poprawnie(StatOdp);
-    } else {
-      cout << " :( Odpowiedz niepoprawna, prawidlowy wynik: " << Wynik << endl << endl; 
-      StatOdp = Niepoprawnie(StatOdp);
-    }
+    file.close();
   }
 
   

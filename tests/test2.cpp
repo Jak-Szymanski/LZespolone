@@ -16,7 +16,7 @@ string toString( ostream& str){
     return ss.str();
 }
 
-TEST_CASE("Test wyswietlania wyrazenia"){
+TEST_CASE("Test WyrazenieZesp wyswietlanie wyrazenia"){
 
     WyrazenieZesp x;
 
@@ -28,12 +28,9 @@ TEST_CASE("Test wyswietlania wyrazenia"){
     x.Arg2.re = -3;
     x.Arg2.im = 4;
 
-    stringstream stream;
-    stream << x;
-    string g = toString(stream);
-    string str;
-    str = "(1.0000-2.0000i) + (-3.0000+4.0000i)";
-    CHECK(str == g); 
+    stringstream out;
+    out << x;
+    CHECK("(1-2i) + (-3+4i)" == out.str()); 
 }
 
 TEST_CASE("Test WyrazenieZesp oblicz") {
@@ -51,7 +48,7 @@ TEST_CASE("Test WyrazenieZesp oblicz") {
     y.re = -2;
     y.im = 2;
 
-    z = Oblicz(x);
+    z = x.Oblicz();
     CHECK(y == z);
 }
 
@@ -61,7 +58,7 @@ TEST_CASE("test Statystyki poprawna odp"){
     x.poprawne = 3;
     x.wszystkie = 5;
 
-    x = Poprawnie(x);
+    x.Poprawnie();
 
     CHECK(x.poprawne == 4);
     CHECK(x.wszystkie == 6);
@@ -73,7 +70,7 @@ TEST_CASE("test Statystyki niepoprawna odp"){
     x.poprawne = 3;
     x.wszystkie = 5;
 
-    x = Niepoprawnie(x);
+    x.Niepoprawnie();
 
     CHECK(x.poprawne == 3);
     CHECK(x.wszystkie == 6);

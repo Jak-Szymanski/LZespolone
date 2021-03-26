@@ -18,22 +18,20 @@ using namespace std;
 struct  LZespolona {
   double   re;    /*! Pole repezentuje czesc rzeczywista. */
   double   im;    /*! Pole repezentuje czesc urojona. */
+
+  void Sprzezenie();
+  double Modul2();
+  LZespolona  operator + (LZespolona  Skl2);
+  LZespolona operator - (LZespolona Skl2);
+  LZespolona operator * (LZespolona Skl2);
+  LZespolona operator / (LZespolona Skl2);
+  LZespolona operator / (double Liczba) const;
+  bool operator == (LZespolona Skl2) const;
+  friend istream& operator >> (istream &wejscie, LZespolona &LZesp);
+  friend ostream& operator << (ostream &wyjscie, LZespolona &LZesp);
 };
 
 
 /*przeciążenia operatorów dla operacji matematycznych na liczbach zespolonych*/
-LZespolona Sprzezenie(LZespolona Skl1);
-double Modul2(LZespolona Skl1);
-
-LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2);
-LZespolona operator - (LZespolona Skl1, LZespolona Skl2);
-LZespolona operator * (LZespolona Skl1, LZespolona Skl2);
-LZespolona operator / (LZespolona Skl1, LZespolona Skl2);
-LZespolona operator / (LZespolona Skl1, double Liczba);
-
-bool operator == (LZespolona Skl1, LZespolona Skl2);
-
-istream& operator >> (istream &wejscie, LZespolona &LZesp);
-ostream& operator << (ostream &wyjscie, LZespolona &LZesp);
 
 #endif

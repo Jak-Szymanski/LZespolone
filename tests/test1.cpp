@@ -32,8 +32,8 @@ TEST_CASE("test LZespolona minimalnie nierówne"){
     x.re = 0;
     x.im = 0;
 
-    y.re = 0.0001;
-    y.im = -0.000111;
+    y.re = 0.01;
+    y.im = -0.0111;
 
     CHECK(!(x == y));
 }
@@ -119,7 +119,7 @@ TEST_CASE("test LZespolona odejmowanie 0.0+0.0i"){
     y.re = 0.0;
     y.im = 0.0;
 
-    CHECK(x+y == x);
+    CHECK(x-y == x);
 }
 
 TEST_CASE("test LZespolona odejmowanie 0.00001+0.00001i"){
@@ -131,7 +131,7 @@ TEST_CASE("test LZespolona odejmowanie 0.00001+0.00001i"){
     y.re = 0.00001;
     y.im = 0.00001;
 
-    CHECK(x+y == x);
+    CHECK(x-y == x);
 }
 
 TEST_CASE("test LZespolona odejmowanie na granicach"){
@@ -264,21 +264,25 @@ TEST_CASE("Test LZespolona sprzezenie") {
 
     x.re = 4;
     x.im = 5;
+    x.Sprzezenie();
 
     y.re = 4;
     y.im = -5;
 
-    CHECK(Sprzezenie(x) == y);
+    CHECK(x == y);
 }
 
 TEST_CASE("Test LZespolona sprzezenie - zero") {
-    LZespolona x;
+    LZespolona x, y;
 
     x.re = 4;
     x.im = 0;
+    x.Sprzezenie();
 
+    y.re=4;
+    y.im=0;
 
-    CHECK(Sprzezenie(x) == x);
+    CHECK(x == y);
 }
 
 TEST_CASE("Test LZespolona modul") {
@@ -290,5 +294,17 @@ TEST_CASE("Test LZespolona modul") {
 
     t = 25;
     
-    CHECK(Modul2(x) == t);
+    CHECK( x.Modul2() == t);
+}
+
+TEST_CASE("Test LZespolona wyświetlanie zaokrąglane") {
+    LZespolona x;
+
+    x.re = 2.0/3.0;
+    x.im = 2.0/3.0;
+
+    ostringstream out;
+    out << x;
+
+    CHECK("(0.66+0.66i)" == out.str());
 }
