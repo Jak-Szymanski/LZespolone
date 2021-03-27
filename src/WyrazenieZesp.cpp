@@ -68,9 +68,9 @@ istream& operator >> (istream &wejscie, Operator &Op) {
         case '/':
             Op = Op_Dziel;
         break; 
-/*         default:
-        throw runtime_error("Niepoprawny operator \n");
-        break;   */  
+        default:
+        wejscie.setstate(ios::failbit);
+        break;  
     }
     return wejscie; 
 }

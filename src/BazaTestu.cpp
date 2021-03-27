@@ -119,3 +119,5 @@ bool PobierzNastpnePytanie( BazaTestu  *wskBazaTestu, WyrazenieZesp *wskWyrazeni
   ++wskBazaTestu->IndeksPytania;
   return true;
 }
+
+
