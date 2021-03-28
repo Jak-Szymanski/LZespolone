@@ -125,12 +125,12 @@ bool LZespolona::operator == (LZespolona Skl2) const{
 }
 
 
-/* Wczytuje liczbe zespoloną z wejścia standardowego
+/* Wczytuje liczbę zespoloną ze strumienia
 Argumenty:
-  wejscie - adres wejscia standardowego
+  wejscie - adres strumienia
   LZesp - adres zmiennej do której będzie wpisana liczba zespolona
 Zwraca:
-  adres wejścia standardowego
+  adres strumienia
  */
 istream& operator >> (istream &wejscie, LZespolona &LZesp){
 
@@ -167,12 +167,12 @@ istream& operator >> (istream &wejscie, LZespolona &LZesp){
     return wejscie;
 }
 
-/* Wyświetla pojedynczą liczbę zespoloną
+/* Wpisuje liczbę zespoloną do strumienia
 Argumenty:
-    wyjscie - adres wyjścia standardowego
-    LZesp - Liczba Zespolona do wyświetlenia
+    wyjscie - adres strumienia
+    LZesp - adres liczby zespolonej do wyświetlenia
 Zwraca:
-    adres wyjścia standardowego
+    adres strumienia
 */
 ostream& operator << (ostream &wyjscie, LZespolona &LZesp){
     double re = (int)(LZesp.re * 100);

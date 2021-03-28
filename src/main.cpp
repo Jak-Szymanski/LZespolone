@@ -27,35 +27,22 @@ int main(int argc, char **argv)
     return 1;
   }
 
-/* 
-  BazaTestu   BazaT = { nullptr, 0, 0 };
-
-  if (InicjalizujTest(&BazaT,argv[1]) == false) {
-    cerr << " Inicjalizacja testu nie powiodla sie." << endl;
-    return 1;
-  } */
-
-
-  
   cout << endl;
   cout << "Start testu arytmetyki zespolonej: " << argv[1] << endl;
   cout << endl;
 
-  int i;                      
+  int i;                   
   WyrazenieZesp   WyrZ_PytanieTestowe;
   LZespolona      Odpowiedz;    
   LZespolona      Wynik;
   Statystyka      StatOdp;
-  string line;
   StatOdp.Wyzeruj();
   ifstream file ((string)argv[1] + ".txt");
 
   if (file.is_open()) {
     while (!file.eof()) {
       if (file.eof()) {
-        cout << "ups" << endl;
         break;
-              /* zrobić żeby nie było błąd we wczytywaniu na końcu */
       }else {
       file >> WyrZ_PytanieTestowe;
       if(file.fail()){

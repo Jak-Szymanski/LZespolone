@@ -3,12 +3,12 @@
 using namespace std;
 
 
-/* Wyświetla wyrażenie operacji na liczbach zespolonych
+/* Wpisuje wyrażenie zespolone do strumienia
 Argumenty:
-    wyjscie - adres wyjścia standardowego
-    WyrZ - wyrażenie zespolone
+    wyjscie - adres strumienia
+    WyrZ - adres wyrażenie zespolone
 Zwraca:
-    adres wyjścia standardowego
+    adres strumienia
  */
 ostream& operator << (ostream &wyjscie, WyrazenieZesp &WyrZ){
     wyjscie << WyrZ.Arg1;
@@ -30,7 +30,13 @@ ostream& operator << (ostream &wyjscie, WyrazenieZesp &WyrZ){
     return wyjscie;
 }
 
-
+/* Wczytuje wyrażenie zespolone ze strumienia
+Argumenty:
+    wejscie - adres strumienia
+    WyrZ - adres zmiennej do której będzie wpisane wyrażenie zespolone
+Zwraca:
+    adres strumienia
+ */
 istream& operator >> (istream &wejscie, WyrazenieZesp &WyrZ) {
     wejscie >> WyrZ.Arg1;
     if(wejscie.fail()){
@@ -51,7 +57,13 @@ istream& operator >> (istream &wejscie, WyrazenieZesp &WyrZ) {
     return wejscie;
 }
 
-
+/* Wczytuje operator arytmetyczny ze strumienia
+Argumenty:
+    wejscie - adres strumienia
+    WyrZ - adres zmiennej do której będzie wpisany operator
+Zwraca:
+    adres strumienia
+ */
 istream& operator >> (istream &wejscie, Operator &Op) {
     char Oper;
     wejscie >> Oper;
