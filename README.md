@@ -1,5 +1,10 @@
 # Projekt 2 - Arytmetyka liczb zespolonych
 
+## UWAGI OD AUTORA PROGRAMU
+
+Program wczytuje pytania z pliku znajdującego się w tym samym katalogu co makefile. Wywoływanie programu przebiega w sposób zgodny z poleceniem (np. ./test_arytmetyki_zespolonej latwe   uruchomi plik latwe.txt). Dołączono dwa pliki z pytaniami latwe.txt i trudne.txt z czego plik latwe.txt zawiera kilka niepoprawnie napisanych pytań które program powinien pominąć. Pliki BazaTestu.cpp i BazaTestu.hh dalej są dołączone do programu, jednak nie wpływają one na działanie programu (ich funkcje nie są nigdzie używane)
+
+
 ## Cel ćwiczenia
 Wykształcenie umiejętności definiowania przeciążeń operatorów arytmetycznych dwuargumentowych i jednoargumentowych dla własnych struktur danych oraz operatora porównania. Przećwiczenie podstawowych operacji na strumieniach plikowych.  Nabycie umiejętności definiowania przeciążeń operacji na strumieniach.
 
