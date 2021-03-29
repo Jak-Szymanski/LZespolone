@@ -27,4 +27,8 @@ struct  LZespolona {
   friend ostream& operator << (ostream &wyjscie, LZespolona &LZesp);
 };
 
+double arg(LZespolona z);
+LZespolona operator += (LZespolona &Arg1, LZespolona const &Arg2);
+LZespolona operator /= (LZespolona &Arg1, LZespolona const &Arg2);
+
 #endif

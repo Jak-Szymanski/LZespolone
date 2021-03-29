@@ -39,6 +39,7 @@ int main(int argc, char **argv)
   StatOdp.Wyzeruj();
   ifstream file ((string)argv[1] + ".txt");
 
+
   if (file.is_open()) {
     while (!file.eof()) {
       if (file.eof()) {

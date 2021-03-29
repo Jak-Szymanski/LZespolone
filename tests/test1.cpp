@@ -308,3 +308,124 @@ TEST_CASE("Test LZespolona wyświetlanie zaokrąglane") {
 
     CHECK("(0.66+0.66i)" == out.str());
 }
+
+TEST_CASE("Test LZespolona dodawanie równa się"){
+    LZespolona x, y, z;
+
+    x.re = 1;
+    x.im = 2;
+
+    y.re = 3;
+    y.im = 4;
+
+    z.re = 4;
+    z.im = 6;
+
+    x+=y;
+
+    CHECK(x == z);
+
+}
+
+TEST_CASE("Test LZespolona dzielenie równa się"){
+
+    LZespolona x, y, z;
+
+    x.re = 1;
+    x.im = -4;
+
+    y.re = 0;
+    y.im = -2;
+
+    z.re = 2;
+    z.im = 0.5;
+
+    x/=y;
+
+    CHECK(x == z);
+
+}
+
+TEST_CASE("Test LZespolona dzielenie równa się przez zero"){
+
+    LZespolona x, y;
+
+    x.re = 1;
+    x.im = -4;
+
+    y.re = 0;
+    y.im = 0;
+
+    WARN_THROWS(x/=y);
+
+}
+
+TEST_CASE("Test argument 1+1i"){
+
+    LZespolona x;
+
+    x.re = 1;
+    x.im = 1;
+    
+    CHECK(abs(arg(x) - 0.7853981634) <= 0.0000000001);
+}
+
+TEST_CASE("Test argument 1-1i"){
+
+    LZespolona x;
+
+    x.re = 1;
+    x.im = -1;
+    
+    CHECK(abs(arg(x) - -0.7853981634) <= 0.0000000001);
+}
+
+TEST_CASE("Test argument -1+1i"){
+
+    LZespolona x;
+
+    x.re = -1;
+    x.im = 1;
+    
+    CHECK(abs(arg(x) - 2.3561944902 ) <= 0.0000000001);
+}
+
+TEST_CASE("Test argument -1-1i"){
+
+    LZespolona x;
+
+    x.re = -1;
+    x.im = -1;
+    
+    CHECK(abs(arg(x) - -2.3561944902 ) <= 0.0000000001);
+}
+
+TEST_CASE("Test argument 0+1i"){
+
+    LZespolona x;
+
+    x.re = 0;
+    x.im = 1; 
+    
+    CHECK(abs(arg(x) - 1.5707963268 ) <= 0.0000000001);
+}
+
+TEST_CASE("Test argument 0-1i"){
+
+    LZespolona x;
+
+    x.re = 0;
+    x.im = -1;
+    
+    CHECK(abs(arg(x) - -1.5707963268 ) <= 0.0000000001);
+}
+
+TEST_CASE("Test argument 0+0i"){
+
+    LZespolona x;
+
+    x.re = 0;
+    x.im = 0;
+    
+    WARN_THROWS(arg(x));
+}

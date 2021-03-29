@@ -24,7 +24,7 @@ Zwraca:
   Kwadrat modułu liczby Skl1
  */
 double LZespolona::Modul2(){
-  return this->re*this->re + this->im * this->im;
+  return this->re * this->re + this->im * this->im;
 }
 
 /*!
@@ -181,3 +181,35 @@ ostream& operator << (ostream &wyjscie, LZespolona &LZesp){
     return wyjscie;
 }
 
+LZespolona operator += (LZespolona &Arg1, LZespolona const &Arg2){
+  
+  Arg1.re += Arg2.re;
+  Arg1.im += Arg2.im;
+
+  return Arg1;
+}
+
+LZespolona operator /= (LZespolona &Arg1, LZespolona const &Arg2){
+  
+  LZespolona Kopia;
+
+  Kopia.re = Arg2.re;
+  Kopia.im = Arg2.im;
+
+  Kopia.Sprzezenie();
+  Arg1 = (Arg1 * Kopia) / Kopia.Modul2();
+  return Arg1;
+}
+
+double arg(LZespolona z){
+
+  double argument;
+
+  if(z.re == 0 && z.im ==0){
+    throw runtime_error("Argument jest nieokreślony \n");
+  } else {
+      argument = atan2(z.im, z.re);
+      cout << "Argument wynosi: " << argument << endl;
+      return argument;
+  }
+}
